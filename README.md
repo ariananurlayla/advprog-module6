@@ -1,4 +1,4 @@
-## Milestone 1: Single threaded web server
+## Milestone 1: Single Threaded Web Server
 ### Commit 1 Reflection Notes
 
 TCP (Transmission Control Protocol) adalah salah satu protokol utama yang digunakan dalam model komunikasi jaringan yang dikenal sebagai TCP/IP (Transmission Control Protocol/Internet Protocol).
@@ -35,7 +35,7 @@ Dalam method handle_connection, status_line diinisialisasi sebagai string yang m
 - `let response = format!("{status_line}\r\nContent-Length: {length}\r\n\r\n{contents}");` Membuat response HTTP yang akan dikirim ke klien. Response terdiri dari status line, header Content-Length yang menyatakan panjang konten, dan isi konten dari file hello.html
 - `stream.write_all(response.as_bytes()).unwrap();` Mengirim response ke klien dalam bentuk byte array setelah diubah dari string menggunakan `as_bytes()`. Jika terjadi kesalahan dalam proses pengiriman, program akan keluar dengan menggunakan unwrap()
 
-## Milestone 3: Validating request and selectively responding
+## Milestone 3: Validating Request and Selectively Responding
 ### Commit 3 Reflection Notes
 ![image](https://github.com/ariananurlayla/advprog-module6/assets/117559846/6cdce661-e8c0-49d4-9ed7-68350bfc168b)
 
@@ -45,7 +45,7 @@ Baris kode berikut bertujuan untuk mendapatkan baris permintaan (request line) d
 Apabila routenya ditemukan, maka akan akan diarahkan pada halaman hello.html. Selain itu, apabila route requestnya tidak ditemukan maka akan dihandle oleh 404.html.
 Ditemukan perulangan kode branching if else sehingga perlu dilakukan refactoring dengan mengeluarkan duplikasi dari block. Kemudian, bagian yang membedakannya yang akan masuk ke dalam branching if else block.
 
-## Milestone 4: Simulation slow response
+## Milestone 4: Simulation Slow Response
 ### Commit 4 Reflection Notes
 `let (status_line, filename) = match &request_line[..] {`
 
@@ -64,3 +64,14 @@ Penggunaan `&request_line[..]` mengubah request_line menjadi slice dari string y
 Jika request_line adalah "GET /sleep HTTP/1.1", maka akan ada delay selama 10 detik menggunakan `thread::sleep(Duration::from_secs(10))`. Kemudian, status_line diatur sebagai "HTTP/1.1 200 OK" dan filename diatur sebagai "hello.html". Ini menunjukkan bahwa server akan membalas setelah delay selama 10 detik.
 
 `_ => ("HTTP/1.1 404 NOT FOUND", "404.html"),` Jika request_line tidak cocok dengan pola yang telah ditentukan sebelumnya, maka status_line akan diatur sebagai "HTTP/1.1 404 NOT FOUND" yang menunjukkan bahwa halaman tidak ditemukan, dan filename diatur sebagai "404.html" yang merupakan halaman kesalahan standar yang akan dikirimkan sebagai respons.
+
+## Milestone 5: Multithreaded Server
+### Commit 5 Reflection Notes
+ThreadPool adalah himpunan thread yang bertugas menangani berbagai tugas yang diberikan.
+Saat ada tugas baru yang muncul, salah satu thread dalam thread pool akan diaktifkan untuk melaksanakan tugas tersebut.
+Sementara itu, thread-thread lainnya bersiap untuk menangani tugas-tugas lain yang mungkin akan datang sehingga memungkinkan banyak proses untuk berjalan secara bersamaan.
+Setelah suatu thread menyelesaikan tugasnya, ia akan kembali ke kondisi idle, dan siap untuk menerima tugas baru.
+Terdapat juga antrian (queue) dalam thread pool untuk menampung tugas-tugas yang masih menunggu jika semua thread sedang sibuk.
+Dengan menggunakan thread pool, server dapat memproses banyak koneksi secara bersamaan dan meningkatkan throughput-nya.
+Namun, penting untuk memperhatikan agar jumlah thread tidak terlalu banyak.
+Apabila jumlah thread terlalu banyak, hal ini dapat meningkatkan beban server dan membuatnya rentan terhadap serangan DoS (Denial of Service).
