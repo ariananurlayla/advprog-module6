@@ -33,3 +33,11 @@ Dalam method handle_connection, status_line diinisialisasi sebagai string yang m
 - `let length = contents.len();` Menghitung panjang (jumlah byte) dari isi file hello.html
 - `let response = format!("{status_line}\r\nContent-Length: {length}\r\n\r\n{contents}");` Membuat response HTTP yang akan dikirim ke klien. Response terdiri dari status line, header Content-Length yang menyatakan panjang konten, dan isi konten dari file hello.html
 - `stream.write_all(response.as_bytes()).unwrap();` Mengirim response ke klien dalam bentuk byte array setelah diubah dari string menggunakan `as_bytes()`. Jika terjadi kesalahan dalam proses pengiriman, program akan keluar dengan menggunakan unwrap()
+
+## Milestone 3: Validating request and selectively responding
+### Commit 3 Reflection Notes
+Dilakukan pengecekan untuk validasi baris pertama dari HTTP request untuk membedakan respons.
+Baris kode berikut bertujuan untuk mendapatkan baris permintaan (request line) dari request HTTP yang masuk agar nantinya dapat diidentifikasi alamat rutenya:
+`let request_line = buf_reader.lines().next().unwrap().unwrap();'
+Apabila routenya ditemukan, maka akan akan diarahkan pada halaman hello.html. Selain itu, apabila route requestnya tidak ditemukan maka akan dihandle oleh 404.html
+Ditemukan perulangan kode branching if else sehingga perlu dilakukan refactoring dengan mengeluarkan duplikasi dari block. Kemudian, bagian yang membedakannya yang akan masuk ke dalam branching if else block.
