@@ -27,6 +27,7 @@ Membaca setiap baris oleh instance BufReader dan menyimpannya dalam Vec<> bernam
 
 ## Milestone 2: Returning HTML
 ### Commit 2 Reflection Notes
+![image](https://github.com/ariananurlayla/advprog-module6/assets/117559846/81cef064-8179-452e-b6ee-e4d21ce126ff)
 Dalam method handle_connection, status_line diinisialisasi sebagai string yang mengindikasikan bahwa respons berhasil dilakukan. Kemudian, konten file hello.html dibaca dan diubah menjadi string menggunakan fs::read_to_string("hello.html"). Panjang dari string contents dihitung dan disimpan dalam variabel length dengan menggunakan fungsi len(). Setelah itu, semua variabel tersebut diformat menjadi sebuah string yang disimpan dalam variabel response.
 - `let status_line = "HTTP/1.1 200 OK` Menyiapkan status line untuk response HTTP yang akan dikirim ke klien. Kode status 200 (OK) ini menyatakan bahwa respons sukses.
 - `let contents = std::fs::read_to_string("hello.html").unwrap();` Membaca  file hello.html ke dalam string contents.
