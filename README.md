@@ -44,3 +44,23 @@ Baris kode berikut bertujuan untuk mendapatkan baris permintaan (request line) d
 `let request_line = buf_reader.lines().next().unwrap().unwrap();`
 Apabila routenya ditemukan, maka akan akan diarahkan pada halaman hello.html. Selain itu, apabila route requestnya tidak ditemukan maka akan dihandle oleh 404.html.
 Ditemukan perulangan kode branching if else sehingga perlu dilakukan refactoring dengan mengeluarkan duplikasi dari block. Kemudian, bagian yang membedakannya yang akan masuk ke dalam branching if else block.
+
+## Milestone 4: Simulation slow response
+### Commit 4 Reflection Notes
+`let (status_line, filename) = match &request_line[..] {`
+
+`match` digunakan untuk membandingkan nilai dari request_line dengan pola tertentu.
+Penggunaan `&request_line[..]` mengubah request_line menjadi slice dari string yang membantu membandingkan bagian dari string dengan pola yang diinginkan.
+
+`"GET / HTTP/1.1" => ("HTTP/1.1 200 OK", "hello.html"),` Jika request_line adalah "GET / HTTP/1.1", maka status_line akan diatur sebagai "HTTP/1.1 200 OK" yang menandakan bahwa respons berhasil, dan filename diatur sebagai "hello.html" yang merupakan nama file yang akan dikirimkan sebagai respons.
+
+``` 
+  GET /sleep HTTP/1.1" => {
+      thread::sleep(Duration::from_secs(10));
+      ("HTTP/1.1 200 OK", "hello.html")
+  }
+```
+
+Jika request_line adalah "GET /sleep HTTP/1.1", maka akan ada delay selama 10 detik menggunakan `thread::sleep(Duration::from_secs(10))`. Kemudian, status_line diatur sebagai "HTTP/1.1 200 OK" dan filename diatur sebagai "hello.html". Ini menunjukkan bahwa server akan membalas setelah delay selama 10 detik.
+
+`_ => ("HTTP/1.1 404 NOT FOUND", "404.html"),` Jika request_line tidak cocok dengan pola yang telah ditentukan sebelumnya, maka status_line akan diatur sebagai "HTTP/1.1 404 NOT FOUND" yang menunjukkan bahwa halaman tidak ditemukan, dan filename diatur sebagai "404.html" yang merupakan halaman kesalahan standar yang akan dikirimkan sebagai respons.
