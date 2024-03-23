@@ -75,3 +75,12 @@ Terdapat juga antrian (queue) dalam thread pool untuk menampung tugas-tugas yang
 Dengan menggunakan thread pool, server dapat memproses banyak koneksi secara bersamaan dan meningkatkan throughput-nya.
 Namun, penting untuk memperhatikan agar jumlah thread tidak terlalu banyak.
 Apabila jumlah thread terlalu banyak, hal ini dapat meningkatkan beban server dan membuatnya rentan terhadap serangan DoS (Denial of Service).
+
+## Bonus: Try to create a function build as a replacement to new and compare
+### Commit Bonus Reflection Notes
+Dalam upaya meningkatkan fungsionalitas, di bonus ini saya mencoba mengimplementasikan fungsi build sebagai alternatif dari fungsi new.
+Penggunaan build dianggap lebih ideal karena memiliki error handling yang lebih jelas.
+Dengan adanya build, program tidak akan mengalami panic ketika mencoba membuat ThreadPool dengan ukuran 0.
+Agar kesalahan dapat terdeteksi dengan baik, didefinisikan sebuah PoolCreationError.
+Apabila ukuran pool diperiksa dan berukuran 0, fungsi build akan mengembalikan error tersebut.
+Hal ini dapat meningkatkan keandalan program dan menghindari terjadinya kesalahan yang tidak terduga.
