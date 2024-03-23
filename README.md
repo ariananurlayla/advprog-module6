@@ -37,8 +37,10 @@ Dalam method handle_connection, status_line diinisialisasi sebagai string yang m
 
 ## Milestone 3: Validating request and selectively responding
 ### Commit 3 Reflection Notes
+![image](https://github.com/ariananurlayla/advprog-module6/assets/117559846/6cdce661-e8c0-49d4-9ed7-68350bfc168b)
+
 Dilakukan pengecekan untuk validasi baris pertama dari HTTP request untuk membedakan respons.
 Baris kode berikut bertujuan untuk mendapatkan baris permintaan (request line) dari request HTTP yang masuk agar nantinya dapat diidentifikasi alamat rutenya:
-`let request_line = buf_reader.lines().next().unwrap().unwrap();'
-Apabila routenya ditemukan, maka akan akan diarahkan pada halaman hello.html. Selain itu, apabila route requestnya tidak ditemukan maka akan dihandle oleh 404.html
+`let request_line = buf_reader.lines().next().unwrap().unwrap();`
+Apabila routenya ditemukan, maka akan akan diarahkan pada halaman hello.html. Selain itu, apabila route requestnya tidak ditemukan maka akan dihandle oleh 404.html.
 Ditemukan perulangan kode branching if else sehingga perlu dilakukan refactoring dengan mengeluarkan duplikasi dari block. Kemudian, bagian yang membedakannya yang akan masuk ke dalam branching if else block.
